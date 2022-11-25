@@ -18,3 +18,9 @@ export const checkEmail=async(formdata)=>{
     return await response
     
 }
+
+export const register=async(formdata)=>{
+    const response = await axios.post(url+'/auth/register', formdata)
+    return await response
+    
+}
