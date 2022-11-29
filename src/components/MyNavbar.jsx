@@ -21,7 +21,7 @@ import {
   return (
     <div>
       <Navbar expand='sm' dark color='dark' fixed='top'>
-        <NavbarBrand href="/">NavLink</NavbarBrand>
+        <NavbarBrand href="/">Menü</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
@@ -49,13 +49,15 @@ import {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-
+      
           {loggedInUser ? 
           (
             <Nav navbar>
                 <NavItem className="nav-link d-flex flex-column align-items-center">
+                  <NavLink to='userProfile' className='nav-link'>
                       <img src="hacker.png" alt="avatar" style={{width:"20px"}}/>
                       {loggedInUser}
+                  </NavLink>
                 </NavItem>
                 <NavItem className='d-flex align-items-end'>
                       <span className='btn text-info' onClick={()=>setLoggedInUser('')}>Logout</span>
