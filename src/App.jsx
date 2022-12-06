@@ -19,7 +19,8 @@ const queryClient = new QueryClient()
 
 
 function App() {
-  const [loggedInUser,setLoggedInUser]=useState('')
+  const [loggedInUser,setLoggedInUser]=useState({})
+  console.log(loggedInUser,"loggedInUser")
   return (
     <QueryClientProvider client={queryClient}>
       <MyNavbar loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
@@ -32,7 +33,8 @@ function App() {
       <Route path='products/:id' element={<Product/>} />
       <Route path='login' element={<Login setLoggedInUser={setLoggedInUser}/>} />
       <Route path='register' element={<Register/>} />
-      {loggedInUser && <Route path='userProfile' element={<UserProfile/>}/>}
+      {loggedInUser?.username && <Route path='userProfile' 
+      element={<UserProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>}/>}
       </Routes>
     </div>
     </QueryClientProvider>

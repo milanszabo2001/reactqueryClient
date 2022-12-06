@@ -41,26 +41,20 @@ import {
               <DropdownToggle nav caret>
                 Options
               </DropdownToggle>
-              <DropdownMenu end>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
-              </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
       
-          {loggedInUser ? 
+          {loggedInUser?.username? 
           (
             <Nav navbar>
                 <NavItem className="nav-link d-flex flex-column align-items-center">
                   <NavLink to='userProfile' className='nav-link'>
-                      <img src="hacker.png" alt="avatar" style={{width:"20px"}}/>
-                      {loggedInUser}
+                      <img src={loggedInUser.avatar} alt="avatar" style={{width:"20px",borderRadius:"50%"}}/>
+                      {loggedInUser.username}
                   </NavLink>
                 </NavItem>
                 <NavItem className='d-flex align-items-end'>
-                      <span className='btn text-info' onClick={()=>setLoggedInUser('')}>Logout</span>
+                      <span className='btn text-info' onClick={()=>setLoggedInUser({})}>Logout</span>
                 </NavItem>
             </Nav>)
             :

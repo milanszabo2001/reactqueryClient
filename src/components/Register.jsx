@@ -114,8 +114,8 @@ export const Register=()=> {
     </div>
     <div className='msg'>{msg}</div>
 
-    {success && <div className='btn btn-outline-dark'>
-      onClick={()=>navigate('/login')}
+    {success && <div className='btn btn-outline-dark' onClick={()=>navigate('/login')}>
+      
       Jelentkezz be</div>}
   </Form>
   )

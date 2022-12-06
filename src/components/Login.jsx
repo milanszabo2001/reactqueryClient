@@ -31,12 +31,13 @@ export const Login=({setLoggedInUser})=> {
 
     const mutationLogin=useMutation(login,{
       onSuccess:(data)=>{
-        console.log(data.data.rowCount)
-        if(data.data.rowCount==0)
+        console.log('mutation-login:',data.data)
+        if(data.data?.error)
           setIsValidP(false)
         else{
           setIsValidP(true)
-          setLoggedInUser(data.data.username)
+          const {username,email,avatar,avatar_id,id}=data.data
+          setLoggedInUser({username:username,email:email,avatar:avatar,avatar_id:avatar_id,id:id})
           navigate('/')
         }
       }
