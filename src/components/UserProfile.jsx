@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { FileDrop } from './FileDrop'
 import {Form,FormGroup,Label,Input,Col,Button,Spinner} from 'reactstrap'
 import { useMutation } from 'react-query'
-import { updateAvatar } from './getData'
+import { updateAvatar,changePassword } from './getData'
 import { MyModal } from './MyModal'
 
 export const UserProfile=({loggedInUser,setLoggedInUser})=> {
@@ -10,6 +10,7 @@ export const UserProfile=({loggedInUser,setLoggedInUser})=> {
   const [msg,setMsg]=useState('')
   const [isUploading,setIsUploading]=useState(false)
   const [modal,setModal]=useState(false)
+  const [newPw,setNewpw]=useState("")
 
   const mutationAvatar=useMutation(updateAvatar,{
     onSuccess: (data)=>{
@@ -36,6 +37,18 @@ export const UserProfile=({loggedInUser,setLoggedInUser})=> {
     setModal(true)
   }
 
+  const handleChangePw=()=>{
+    console.log('új jelszo:',newPw)
+    mutationChangePw.mutate({username:loggedInUser.username,password:newPw})
+  }
+
+  const mutationChangePw=useMutation(changePassword,{
+  onSuccess: (data)=>{
+    console.log(data.data)
+    setMsg(data.data.msg)
+  }  
+})
+
   return (
     <div>
         <h6 className='p-2 border-bottom text-center'>Felhasználói fiók</h6>
@@ -46,20 +59,23 @@ export const UserProfile=({loggedInUser,setLoggedInUser})=> {
         <Form>
         <FormGroup>
     <Label for="pw" sm={2}>
-      New Password
+      Új jelszó
     </Label>
-    <Col sm={10}>
+    <Col sm={8}>
     <Input
       id="pwd"
       name="password"
       type="password"
+      value={newPw} onChange={(e)=>setNewpw(e.target.value)}
     />
     </Col>
     <Col sm={4}>
         <Input 
         type='button'
+        disabled={!newPw || newPw.length<6}
         value='Change Password'
-        onClick={()=>console.log('Change password...')}
+        className='btn btn-primary'
+        onClick={handleChangePw}
         />
     </Col>
   </FormGroup>

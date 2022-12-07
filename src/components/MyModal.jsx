@@ -2,8 +2,10 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useMutation } from 'react-query';
 import { deleteUser } from './getData';
+import { useNavigate } from 'react-router-dom';
 
 export const MyModal=({modal,setModal,username,avatar_id,setLoggedInUser})=>{
+  const navigate=useNavigate()
 
     const toggle = () => setModal(!modal)
     const toggleDelete=()=>{
@@ -18,6 +20,7 @@ const mutationDelete=useMutation(deleteUser,{
     onSuccess:(data)=>{
         console.log(data.data)
         setLoggedInUser({})
+        navigate('/')
     }
 })
 

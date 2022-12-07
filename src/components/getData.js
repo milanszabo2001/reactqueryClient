@@ -39,3 +39,8 @@ export const deleteUser=async (formdata)=>{
     const response = await axios.post(url+'/auth/deleteUser', formdata)
     return await response
 }
+
+export const changePassword=async (formdata)=>{
+    const response = await axios.put(url+'/auth/changePassword', formdata)
+    return await response
+}
